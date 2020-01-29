@@ -8,11 +8,22 @@ from starlette.applications import Starlette
 from starlette.middleware.cors import CORSMiddleware
 from starlette.responses import HTMLResponse, JSONResponse
 from starlette.staticfiles import StaticFiles
+import csv
 
-export_file_url = 'https://www.dropbox.com/s/6bgq8t6yextloqp/export.pkl?raw=1'
+export_file_url = 'https://drive.google.com/uc?export=download&id=1-0N3AKXR2kraKIJI9I-4TGsG61nLnJV6'
 export_file_name = 'export.pkl'
 
-classes = ['black', 'grizzly', 'teddys']
+#classes = ['black', 'grizzly', 'teddys']
+#creating classes
+classes = []
+with open('classes_name.csv', 'r') as csv_file:
+  csv_reader = csv.reader(csv_file, delimiter='\n')
+  for row in csv_reader:
+    classes.append(row[0])
+
+classes = sorted(classes)
+#ending 
+
 path = Path(__file__).parent
 
 app = Starlette()
