@@ -13,18 +13,18 @@ import csv
 export_file_url = 'https://drive.google.com/uc?export=download&id=1-0N3AKXR2kraKIJI9I-4TGsG61nLnJV6'
 export_file_name = 'export.pkl'
 
+path = Path(__file__).parent
+
 #classes = ['black', 'grizzly', 'teddys']
 #creating classes
 classes = []
-with open('classes_name.csv', 'r') as csv_file:
+with open(path/'classes_name.csv', 'r') as csv_file:
   csv_reader = csv.reader(csv_file, delimiter='\n')
   for row in csv_reader:
     classes.append(row[0])
 
 classes = sorted(classes)
 #ending 
-
-path = Path(__file__).parent
 
 app = Starlette()
 app.add_middleware(CORSMiddleware, allow_origins=['*'], allow_headers=['X-Requested-With', 'Content-Type'])
